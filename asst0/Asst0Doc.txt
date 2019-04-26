@@ -1,0 +1,88 @@
+ ---------------------
+/ Design and Testing /
+--------------------
+
+Use an array of linked lists:
+	-The array made it easier to perform mergesort
+	-A linked list allows for dynamic memory. I can store various sizes of data without knowing the sizes beforehand.
+	-In this case I used two types of nodes for data storage:
+		-A buffer node
+			-I used this for storing each line of data. This can store strings up to 1024 bytes
+		-A (regular) node
+			-I used this to store data from each column. This can store strings up to 256 bytes
+Reading in data:
+	-Initially I used fscanf() but it would automatically parse the data and I would run into trouble whenever I encountered names 
+	-I used fgets() to read each line and then stored it in a buffer node
+	-At first I used strtok() to parse the data but I ran into problems when there were empty values, spaces, or commas within quotes
+		-I resorted to making my own tokenizing function, where I go through each line, character by character, and separating the data appropriately
+	-Each entry was store in a node corresponding to its line and column
+Mergesort:
+	-Because I used an array of nodes to store the data, it was easy to implement the algorithm. However because it was an array of linked lists, I had to traverse
+	 the list each time I wanted to reach the column I needed.
+	-Initially I used strcmp() to compare each entry and sort accordingly. However, this would not work on entries that were numeric. In this case I tried
+	 using atoi() but the data was too big for an int. I then used double atof(), which converts the number to a double. This not only is big enough to store
+	 the data, but it also allows for storing numbers with decimals places.
+	-Had to write a copy function, which copys the entire linked list from one index to another
+Other problems:
+	-Kept running into segfaults and heap buffer overflows
+	-Compiling with -fsanitize=address would sometimes cause segfaults
+	-Had issues correctly inserting a node and then returing the front/head
+	-Had issues where the last column of the entries where it was stored with '\n' at the end
+	-Had to account for blank files
+
+ ----------------
+/ Documentation /
+---------------
+
+When compiling, follow the format::
+	cat {file_name.csv} | ./simpleCSVsorter -c {column_name}
+
+SYNOPSIS
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include <string.h>
+	#include "simpleCSVsorter.h"
+	
+	void freeBNode(BN *head);
+	void freeNode(Node *head);
+	BN *BNinsert(BN *front, char line[1024]);
+	Node *insert(Node *front, char token[256]);
+	void printList(Node **arr, int lineCount);
+	void getToken(Node **arr, char *line, int index);
+	void mergeSort(Node **arr, int left, int right, int colNum, int numCols);
+	
+DESCRIPTION
+	freeBNode() and freeNode() are recursive functions that free the linked list of their respective data types.
+
+	BNinsert() and insert() are functions that create new nodes of their respective data types and inserts them into a linked list.
+	When inserted, the functions returns the front of the list. BNinsert has a larger string buffer size due to it being used to store lines instead of tokens.
+
+	printList() is a function that prints out the data of the given array of linked lists. It goes through the entire linked list of an index before moving on to
+	the next index.
+
+	getToken() is a function that gets each column entry in line, which is then stored in arr[index];
+
+	mergeSort() is a function that performs a mergesort on the provided array.
+
+ERRORS
+	Program exits on the following:
+		-If '-c' is not the first argument (argv[1])
+		-If {column_name} is not one of the column names
+		-If there are too many arguments (argc > 3)
+		-If there are too few arguments (argc < 2)
+
+ --------------
+/ Header File /
+-------------
+
+The header file contains function prototypes and structs for simpleCSVsorter.c as well as a protype for mergeSort. The protoype for mergeSort is necessary
+ in order for it to be avaiable to simpleCSVsorter.c
+
+ ---------------
+/ Extra Credit /
+--------------
+
+In order to make this program viable for any *.csv file it is necessary to dynamically allocate memory to account for various data sizes. In my implementation,
+I used a loop of strtok() to get the number of columns and a loop of fgets() to get the number of lines or entries. With this data I can malloc an appropriate amount
+of bytes for my data structures. In addition, I used the double data type to temporarily store numbers for comparisons. This not only allows for comparison of numbers with
+decimals, but the data type is also able to hold a higher number than int.

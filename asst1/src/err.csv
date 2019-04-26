@@ -1,0 +1,98 @@
+=================================================================
+==29597== ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60040000dee8 at pc 0x4034a4 bp 0x7fff37a4b590 sp 0x7fff37a4b580
+READ of size 4 at 0x60040000dee8 thread T0
+    #0 0x4034a3 (/ilab/users/jjd279/CS214/asst1/src/scannerCSVsorter+0x4034a3)
+    #1 0x4027fe (/ilab/users/jjd279/CS214/asst1/src/scannerCSVsorter+0x4027fe)Error: More headings than number of columns in file: /Test/test8.csv
+
+    #2 0x402538Error: The following file does not contain proper movie csv headings: /Test/test.csv
+ (/ilab/users/jjd279/CS214/asst1/src/scannerCSVsorter+0x402538)
+    #3 0x401be4=================================================================
+ (/ilab/users/jjd279/CS214/asst1/src/scannerCSVsorter+0x401be4)
+==29606== ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60040000de28 at pc 0x4034a4 bp 0x7fff37a4b2f0 sp 0x7fff37a4b2e0
+    #4 0x7f88dd7bc444READ of size 4 at 0x60040000de28 thread T0
+ (/usr/lib64/libc-2.17.so+0x22444)
+    #0 0x4034a3    #5 0x401398 (/ilab/users/jjd279/CS214/asst1/src/scannerCSVsorter+0x4034a3) (/ilab/users/jjd279/CS214/asst1/src/scannerCSVsorter+0x401398)
+
+    #1 0x4027fe (/ilab/users/jjd279/CS214/asst1/src/scannerCSVsorter+0x4027fe)0x60040000dee8 is located 8 bytes to the left of
+ 9-byte region [0x60040000def0,0x60040000def9)
+    #2 0x402538 (/ilab/users/jjd279/CS214/asst1/src/scannerCSVsorter+0x402538)allocated by thread T0 here:
+
+    #0 0x7f88ddb7cef9    #3 0x40226d (/usr/lib64/libasan.so.0.0.0+0x15ef9) (/ilab/users/jjd279/CS214/asst1/src/scannerCSVsorter+0x40226d)
+
+    #1 0x402e1e    #4 0x40226d (/ilab/users/jjd279/CS214/asst1/src/scannerCSVsorter+0x402e1e) (/ilab/users/jjd279/CS214/asst1/src/scannerCSVsorter+0x40226d)
+    #2 0x4027fe (/ilab/users/jjd279/CS214/asst1/src/scannerCSVsorter+0x4027fe)
+    #3 0x402538 (/ilab/users/jjd279/CS214/asst1/src/scannerCSVsorter+0x402538)
+    #4 0x401be4 (/ilab/users/jjd279/CS214/asst1/src/scannerCSVsorter+0x401be4)
+    #5 0x7f88dd7bc444 (/usr/lib64/libc-2.17.so+0x22444)
+Shadow bytes around the buggy address:
+  0x0c00ffff9b80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c00ffff9b90: fa fa fa fa fa
+    #5 0x401be4 fa fa fa fa fa fa fa fa fa fa fa (/ilab/users/jjd279/CS214/asst1/src/scannerCSVsorter+0x401be4)
+  0x0c00ffff9ba0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c00ffff9bb0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c00ffff9bc0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+=>0x0c00ffff9bd0: fa fa fa fa fa fa fa fa fa fa 00 00 fa[fa]00 01
+  0x0c00ffff9be0: fa fa 00 03 fa fa fd fd fa fa fd fa fa fa fd fd
+  0x0c00ffff9bf0: fa fa fd fd fa fa fd fd fa fa fd fa
+ fa fa 04 fa
+  0x0c00ffff9c00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c00ffff9c10: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c00ffff9c20: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+    #6 0x7f88dd7bc444  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:     fa
+  Heap righ redzone:     fb
+  Freed Heap region:     fd
+  Stack left redzone:    f1
+ (/usr/lib64/libc-2.17.so+0x22444)  Stack mid redzone:     f2
+  Stack right redzone:   f3
+  Stack partial redzone: f4
+  Stack after return:    f5
+  Stack use after scope: f8
+  Global redzone:        f9
+  Global init order:     f6
+  Poisoned by user:      f7
+  ASan internal:         fe
+==29597== ABORTING
+
+    #7 0x401398 (/ilab/users/jjd279/CS214/asst1/src/scannerCSVsorter+0x401398)
+0x60040000de28 is located 8 bytes to the right of 16-byte region [0x60040000de10,0x60040000de20)
+allocated by thread T0 here:
+    #0 0x7f88ddb7d08e (/usr/lib64/libasan.so.0.0.0+0x1608e)
+    #1 0x402ede (/ilab/users/jjd279/CS214/asst1/src/scannerCSVsorter+0x402ede)
+    #2 0x4027fe (/ilab/users/jjd279/CS214/asst1/src/scannerCSVsorter+0x4027fe)
+    #3 0x402538 (/ilab/users/jjd279/CS214/asst1/src/scannerCSVsorter+0x402538)
+    #4 0x40226d (/ilab/users/jjd279/CS214/asst1/src/scannerCSVsorter+0x40226d)
+    #5 0x40226d (/ilab/users/jjd279/CS214/asst1/src/scannerCSVsorter+0x40226d)
+    #6 0x401be4 (/ilab/users/jjd279/CS214/asst1/src/scannerCSVsorter+0x401be4)
+    #7 0x7f88dd7bc444 (/usr/lib64/libc-2.17.so+0x22444)
+Shadow bytes around the buggy address:
+  0x0c00ffff9b70: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c00ffff9b80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c00ffff9b90: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c00ffff9ba0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c00ffff9bb0: fa fa fa fa fa fa fa fa fa fa 00 05 fa fa 00 fa
+=>0x0c00ffff9bc0: fa fa 00 00 fa[fa]fd fd fa fa fd fd fa fa 00 06
+  0x0c00ffff9bd0: fa fa fd fd fa fa fd fd fa fa fd fd fa fa 00 fa
+  0x0c00ffff9be0: fa fa fd fd fa fa fd fd fa fa fd fa fa fa fd fd
+  0x0c00ffff9bf0: fa fa fd fd fa fa fd fd fa fa fd fa fa fa 04 fa
+  0x0c00ffff9c00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c00ffff9c10: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:     fa
+  Heap righ redzone:     fb
+  Freed Heap region:     fd
+  Stack left redzone:    f1
+  Stack mid redzone:     f2
+  Stack right redzone:   f3
+  Stack partial redzone: f4
+  Stack after return:    f5
+  Stack use after scope: f8
+  Global redzone:        f9
+  Global init order:     f6
+  Poisoned by user:      f7
+  ASan internal:         fe
+==29606== ABORTING
